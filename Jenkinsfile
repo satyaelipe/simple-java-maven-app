@@ -15,6 +15,7 @@ pipeline {
         sh 'mvn clean package sonar:sonar'
         //sh "mvn clean package"
           }
+        }
     }
       
      stage("Quality Gate") {
