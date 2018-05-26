@@ -1,6 +1,4 @@
 pipeline {
-
-  node any
   
   stages{
     stage('SCM Checkout'){
