@@ -18,7 +18,7 @@ pipeline {
       steps{
         junit 'build/reports/**/*.xml'
           }
-
+     }
     }
 
   }
