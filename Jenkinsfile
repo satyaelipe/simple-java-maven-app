@@ -21,6 +21,12 @@ pipeline {
         junit '**/*.xml'
           }
     }
+    
+     stage('Email Notification'){
+      steps{
+        mail bcc: '', body: '', cc: '', from: '', replyTo: '', subject: 'Hello from Jenkins...!!!', to: 'mrinn777@gmail.com'
+          }
+     }
 
   }
   
