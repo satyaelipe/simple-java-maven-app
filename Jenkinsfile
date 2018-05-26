@@ -17,8 +17,8 @@ pipeline {
       
      stage('Test'){
       steps{
-        archiveArtifacts artifacts: '/**/*.jar', fingerprint: true
-        junit '/**/*.xml'
+        archiveArtifacts artifacts: '**/*.jar', fingerprint: true
+        junit '**/*.xml'
           }
     }
 
