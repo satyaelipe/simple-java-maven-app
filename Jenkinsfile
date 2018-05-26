@@ -11,8 +11,12 @@ pipeline {
 
     stage('Build'){
       steps{
-        //def mvnHome = tool name: 'maven-3.5.3', type: 'maven'
         sh "mvn clean package"
+          }
+      
+     stage('Test'){
+      steps{
+        junit 'build/reports/**/*.xml'
           }
 
     }
