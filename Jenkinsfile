@@ -1,17 +1,20 @@
 pipeline {
-  agent {
-    docker {
-      image 'maven:3.5.0-alpine'
-      args '-v $HOME/Public/.m2:/root/.m2'
+
+  node any
+
+  stages{
+    stage('SCM Checkout'){
+      git https://github.com/selipe16474/simple-java-maven-app.git
     }
+
+    stage('Build'){
+    def mvnHome = tool name: 'maven-3.5.3', type: 'maven'
+    sh ${mvnHome/bin/mvn} clean package
+
+    }
+
   }
 
-  stages {
-    stage('Build') {
-      steps{
-        sh 'mvn -B -Dskiptests clean package'
-      }
-    }
-  }
+
 
 }
