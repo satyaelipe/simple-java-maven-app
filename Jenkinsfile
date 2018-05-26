@@ -9,11 +9,25 @@ pipeline {
         }
     }
 
-    stage('Build'){
+    stage('Build and SonarQube Analysis'){
       steps{
-        sh "mvn clean package"
+        withMaven(maven:'Maven 3.5.3') {
+        sh 'mvn clean package sonar:sonar'
+        //sh "mvn clean package"
           }
     }
+      
+     stage("Quality Gate") {
+            steps {
+                timeout(time: 1, unit: 'HOURS') {
+                    // Parameter indicates whether to set pipeline to UNSTABLE if Quality Gate fails
+                    // true = set pipeline to UNSTABLE, false = don't
+                    // Requires SonarQube Scanner for Jenkins 2.7+
+                    waitForQualityGate abortPipeline: true
+                }
+            }
+        }
+      
       
      stage('Test'){
       steps{
