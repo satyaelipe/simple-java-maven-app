@@ -1,12 +1,17 @@
 pipeline {
-    agent {
-        docker { image 'node:7-alpine' }
+  agent {
+    docker {
+      image 'maven:3.5.0-alpine'
+      args '-v $HOME/Public/.m2:/root/.m2'
     }
-    stages {
-        stage('Test') {
-            steps {
-                sh 'node --version'
-            }
-        }
+  }
+
+  stages {
+    stage('Build') {
+      steps{
+        sh 'mvn -B -Dskiptests clean package'
+      }
     }
+  }
+
 }
