@@ -34,30 +34,21 @@ pipeline {
         sh 'mvn sonar:sonar'
           }
         }
-      post{
-        always{
-          steps{
-              timeout(time: 1, unit: 'HOURS') {
-              waitForQualityGate abortPipeline: true
-          }
-          }
-        }
-      }
     }
 
+    stage("Sonar Quality Gate Check") {
+            steps {
+                timeout(time: 1, unit: 'HOURS') {
+                    waitForQualityGate abortPipeline: true
+                }
+            }
+        }
+    
     stage ('Deliver'){
       steps{
         sh './jenkins/scripts/deliver.sh'
       }
     }
-
-  /*   stage("Quality Gate") {
-    *        steps {
-    *            timeout(time: 1, unit: 'HOURS') {
-    *                waitForQualityGate abortPipeline: true
-    *            }
-    *        }
-        } */
 
     /* stage('Email Notification'){
       steps{
