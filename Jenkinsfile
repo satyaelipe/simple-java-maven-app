@@ -3,9 +3,10 @@ pipeline {
   agent none
 
   stages{
-    stage('SCM Checkout'){
+    stage('Checkout SCM'){
       steps{
-        git 'https://github.com/selipe16474/simple-java-maven-app.git'
+        //git 'https://github.com/selipe16474/simple-java-maven-app.git'
+        git ''/Users/selipe/.jenkins/workspace/simple-java-maven-app-pipeline'
         }
     }
 
