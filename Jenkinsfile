@@ -35,8 +35,8 @@ pipeline {
 
      stage('Test'){
       steps{
-        archiveArtifacts artifacts: 'Users/selipe/.jenkins/workspace/**/*.jar', fingerprint: true
-        junit 'Users/selipe/.jenkins/workspace/**/*.xml'
+        archiveArtifacts artifacts: 'target/arctifacts/*.jar', fingerprint: true
+        junit 'targets/junit-reports/*.xml'
           }
     }
 
