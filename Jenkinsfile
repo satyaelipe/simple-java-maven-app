@@ -14,6 +14,7 @@ pipeline {
         withSonarQubeEnv('sonar-7.1'){
         sh "mvn clean package sonar:sonar"
         }
+      }
     }
 
     stage("Sonar Quality Gate Check") {
