@@ -15,30 +15,49 @@ pipeline {
         }
     }
 
+    stage('Test'){
+     steps{
+       sh 'mvn test'
+         }
+      post{
+        always{
+          junit 'target/surefire-reports/*.xml'
+          archiveArtifacts artifacts: 'target/arctifacts/*.jar', fingerprint: true
+        }
+      }
+
+    }
+
     stage('SonarQube Analysis'){
       steps{
         withSonarQubeEnv('sonar-7.1') {
         sh 'mvn sonar:sonar'
           }
         }
-    }
-
-
-     stage("Quality Gate") {
-            steps {
-                timeout(time: 1, unit: 'HOURS') {
-                    waitForQualityGate abortPipeline: true
-                }
-            }
-        }
-
-
-     stage('Test'){
-      steps{
-        archiveArtifacts artifacts: 'target/arctifacts/*.jar', fingerprint: true
-        junit 'targets/junit-reports/*.xml'
+      post{
+        always{
+          steps{
+              timeout(time: 1, unit: 'HOURS') {
+              waitForQualityGate abortPipeline: true
           }
+          }
+        }
+      }
     }
+
+    stage ('Deliver'){
+      steps{
+        sh './jenkins/scripts/deliver.sh'
+      }
+    }
+
+  /*   stage("Quality Gate") {
+    *        steps {
+    *            timeout(time: 1, unit: 'HOURS') {
+    *                waitForQualityGate abortPipeline: true
+    *            }
+    *        }
+        } */
 
      stage('Email Notification'){
       steps{
