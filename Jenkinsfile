@@ -5,8 +5,7 @@ pipeline {
   stages{
     stage('Checkout SCM'){
       steps{
-        //git 'https://github.com/selipe16474/simple-java-maven-app.git'
-        git ''/Users/selipe/.jenkins/workspace/simple-java-maven-app-pipeline'
+        git 'https://github.com/selipe16474/simple-java-maven-app.git'
         }
     }
 
@@ -60,11 +59,11 @@ pipeline {
     *        }
         } */
 
-     stage('Email Notification'){
+    /* stage('Email Notification'){
       steps{
         mail bcc: '', body: 'Hi from Satya Elipe', cc: '', from: '', replyTo: '', subject: 'Hello from Jenkins...!!!', to: 'mrinn777@gmail.com'
           }
-     }
+     } */
 
   }
 
