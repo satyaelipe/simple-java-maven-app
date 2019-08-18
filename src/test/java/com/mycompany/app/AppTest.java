@@ -39,6 +39,8 @@ public class AppTest
             fail("\"message\" is not \"Hello World!\"");
         }
     }
+    
+    //Clean up Streams
 
     @After
     public void cleanUpStreams() {
