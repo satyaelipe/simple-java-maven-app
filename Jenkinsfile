@@ -5,8 +5,7 @@ pipeline {
   stages{
     stage('Checkout SCM'){
       steps{
-        #git 'https://github.com/selipe16474/simple-java-maven-app.git'
-        git 'git@github.com:satyaelipe/simple-java-maven-app.git'
+        git 'https://github.com/satyaelipe/simple-java-maven-app.git'
         }
     }
 
